@@ -8,21 +8,22 @@ import Link from "next/link";
 
 const BottomNavigation = () => {
   return (
-    <div className="border-y items-center border-gray-300 border-solid h-12 bg-zinc-200 z-50 fixed bottom-0 w-full">
-      <div className="flex justify-between items-center px-6">
-        <Link href="/" legacyBehavior>
-          <a className="w-1/4 flex justify-center items-center">
-            <HomeIcon className="w-9 h-12" />
-          </a>
+    <div className="tw-border-y tw-items-center tw-border-gray-300 tw-border-solid tw-h-12 tw-bg-zinc-200 tw-z-50 tw-fixed tw-bottom-0 tw-w-full">
+      <div className="tw-flex tw-justify-between tw-items-center tw-px-6">
+        <Link
+          href="/"
+          className="tw-w-1/4 tw-flex tw-justify-center tw-items-center"
+        >
+          <HomeIcon className="tw-w-9 tw-h-12 tw-text-black" />
         </Link>
-        <a className="w-1/4 flex justify-center items-center">
-          <Bars3Icon className="w-9 h-12" />
+        <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
+          <Bars3Icon className="tw-w-9 tw-h-12 tw-text-black" />
         </a>
-        <a className="w-1/4 flex justify-center items-center">
-          <MagnifyingGlassIcon className="w-9 h-12" />
+        <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
+          <MagnifyingGlassIcon className="tw-w-9 tw-h-12 tw-text-black" />
         </a>
-        <a className="w-1/4 flex justify-center items-center">
-          <UserIcon className="w-9 h-12" />
+        <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
+          <UserIcon className="tw-w-9 tw-h-12 tw-text-black" />
         </a>
       </div>
     </div>

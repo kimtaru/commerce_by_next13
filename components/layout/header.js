@@ -18,11 +18,11 @@ const Badge = styled.div`
 
 export default function Header() {
   return (
-    <header className="bg-white ">
-      <div className="flex items-center justify-between py-2 px-4 bg-blue-800">
-        <div className="text-xl text-white font-bold">W I S E L Y</div>
-        <div className="relative">
-          <ShoppingCartIcon className="w-8 h-8 text-white" />
+    <header className="tw-bg-white ">
+      <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 tw-bg-blue-800">
+        <div className="tw-text-xl tw-text-white tw-font-bold">W I S E L Y</div>
+        <div className="tw-relative">
+          <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-white" />
           <Badge>1</Badge>
         </div>
       </div>
