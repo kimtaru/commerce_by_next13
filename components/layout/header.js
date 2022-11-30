@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Badge = styled.div`
   font-size: 0.75rem /* 12px */;
-  line-height: 1rem /* 16pxk */;
+  line-height: 1rem /* 16px */;
   width: 1rem;
   height: 1rem;
   position: absolute;
