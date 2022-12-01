@@ -32,6 +32,7 @@ const StyledLink = styled(Link)`
   color: rgb(107 114 128 / var(--tw-text-opacity));
   line-height: 2.5rem;
   font-weight: 400;
+  font-size: 16px;
   ${(props) =>
     props.selected &&
     ` color: rgb(30 64 175 / var(--tw-text-opacity));
