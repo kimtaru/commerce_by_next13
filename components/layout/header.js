@@ -20,7 +20,9 @@ export default function Header() {
   return (
     <header className="tw-bg-white ">
       <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 tw-bg-blue-800">
-        <div className="tw-text-xl tw-text-white tw-font-bold">W I S E L Y</div>
+        <div className="tw-text-xl tw-text-white tw-font-bold">
+          W A I K I K I
+        </div>
         <div className="tw-relative">
           <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-white" />
           <Badge>1</Badge>

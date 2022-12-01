@@ -4,6 +4,6 @@
 
 @layer components {
   .test-border {
-    @apply border-dashed border border-red-500;
+    @apply tw-border-dashed tw-border-2 tw-border-red-500;
   }
 }

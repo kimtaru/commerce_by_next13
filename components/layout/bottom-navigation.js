@@ -14,16 +14,16 @@ const BottomNavigation = () => {
           href="/"
           className="tw-w-1/4 tw-flex tw-justify-center tw-items-center"
         >
-          <HomeIcon className="tw-w-9 tw-h-12 tw-text-black" />
+          <HomeIcon className="tw-w-7 tw-h-12 tw-text-black" />
         </Link>
         <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
-          <Bars3Icon className="tw-w-9 tw-h-12 tw-text-black" />
+          <Bars3Icon className="tw-w-7 tw-h-12 tw-text-black" />
         </a>
         <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
-          <MagnifyingGlassIcon className="tw-w-9 tw-h-12 tw-text-black" />
+          <MagnifyingGlassIcon className="tw-w-7 tw-h-12 tw-text-black" />
         </a>
         <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
-          <UserIcon className="tw-w-9 tw-h-12 tw-text-black" />
+          <UserIcon className="tw-w-7 tw-h-12 tw-text-black" />
         </a>
       </div>
     </div>
