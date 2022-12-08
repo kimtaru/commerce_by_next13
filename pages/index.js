@@ -102,6 +102,52 @@ export default function Home() {
             <p className="tw-font-normal tw-line-through">20,900원</p>
           </div>
         </div>
+        <div>
+          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
+            <Image
+              src={prd2}
+              alt="recommend"
+              fill
+              className="tw-rounded-xl"
+              style={{ objectFit: "cover" }}
+            />
+            <ShoppingCartIcon
+              onClick={() => {
+                addCart("code2");
+              }}
+              style={{ padding: "6px" }}
+              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
+            />
+          </div>
+          <div className="tw-pt-3 tw-pl-1">피로개선 홍삼스틱 30개입</div>
+          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
+            <p>6,900원</p>
+            <p className="tw-font-normal tw-line-through">20,900원</p>
+          </div>
+        </div>
+        <div>
+          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
+            <Image
+              src={prd2}
+              alt="recommend"
+              fill
+              className="tw-rounded-xl"
+              style={{ objectFit: "cover" }}
+            />
+            <ShoppingCartIcon
+              onClick={() => {
+                addCart("code2");
+              }}
+              style={{ padding: "6px" }}
+              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
+            />
+          </div>
+          <div className="tw-pt-3 tw-pl-1">피로개선 홍삼스틱 30개입</div>
+          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
+            <p>6,900원</p>
+            <p className="tw-font-normal tw-line-through">20,900원</p>
+          </div>
+        </div>
 
         {/* <div className="tw-relative" style={{ paddingBottom: "100%" }}>
           <Image
