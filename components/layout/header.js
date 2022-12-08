@@ -1,6 +1,8 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import TopMenu from "./top-menu";
 import styled from "styled-components";
+import useSWR from "swr";
+import storage from "../../lib/storage";
 
 const Badge = styled.div`
   font-size: 0.75rem /* 12px */;
@@ -17,6 +19,8 @@ const Badge = styled.div`
 `;
 
 export default function Header() {
+  const { data = [] } = useSWR("waikiki_basket_guest", storage);
+  console.log(data);
   return (
     <header className="tw-bg-white ">
       <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 tw-bg-blue-800">
@@ -25,7 +29,7 @@ export default function Header() {
         </div>
         <div className="tw-relative">
           <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-white" />
-          <Badge>1</Badge>
+          {data.length > 0 ? <Badge>{data.length}</Badge> : null}
         </div>
       </div>
       <TopMenu />

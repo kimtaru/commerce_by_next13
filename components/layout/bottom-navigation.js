@@ -16,9 +16,14 @@ const BottomNavigation = () => {
         >
           <HomeIcon className="tw-w-7 tw-h-12 tw-text-black" />
         </Link>
-        <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
+
+        <Link
+          href="/categories"
+          className="tw-w-1/4 tw-flex tw-justify-center tw-items-center"
+        >
           <Bars3Icon className="tw-w-7 tw-h-12 tw-text-black" />
-        </a>
+        </Link>
+
         <a className="tw-w-1/4 tw-flex tw-justify-center tw-items-center">
           <MagnifyingGlassIcon className="tw-w-7 tw-h-12 tw-text-black" />
         </a>
