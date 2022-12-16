@@ -33,6 +33,8 @@ const StyledLink = styled(Link)`
   line-height: 2.5rem;
   font-weight: 400;
   font-size: 16px;
+  text-decoration: none;
+
   ${(props) =>
     props.selected &&
     ` color: rgb(30 64 175 / var(--tw-text-opacity));
@@ -41,6 +43,7 @@ const StyledLink = styled(Link)`
       border-style: solid;
       --tw-border-opacity: 1;
       border-color: rgb(30 64 175 / var(--tw-border-opacity));
+      text-decoration: none;
     `}
 `;
 

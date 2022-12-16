@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const BottomNavigation = () => {
   return (
-    <div className="tw-border-y tw-items-center tw-border-gray-300 tw-border-solid tw-h-12 tw-bg-zinc-200 tw-z-50 tw-fixed tw-bottom-0 tw-w-full">
+    <div className="tw-border-y tw-items-center tw-border-gray-300 tw-border-solid tw-h-12 tw-bg-zinc-200 tw-z-50 tw-fixed tw-bottom-0 tw-w-full tw-max-w-lg">
       <div className="tw-flex tw-justify-between tw-items-center tw-px-6">
         <Link
           href="/"

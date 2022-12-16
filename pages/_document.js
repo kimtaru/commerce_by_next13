@@ -39,7 +39,7 @@ export default class MyDocument extends Document {
           <meta httpEquiv="Expires" content="0"></meta>
           <meta httpEquiv="Pragma" content="no-cache"></meta>
         </Head>
-        <body>
+        <body style={{ maxWidth: "512px", margin: "0 auto" }}>
           <Main />
           <NextScript />
         </body>

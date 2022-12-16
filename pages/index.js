@@ -1,19 +1,16 @@
 import { Carousel, message } from "antd";
 import Layout from "../components/layout/layout";
-import banner1 from "../images/menuBanner1.png";
-import banner2 from "../images/menuBanner2.png";
-import prd1 from "../images/prd1.jpeg";
-import prd2 from "../images/prd2.jpeg";
 import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import useSWR, { mutate } from "swr";
-import storage from "../lib/storage";
+import { mutate } from "swr";
+import useStorage from "../hooks/use-storage";
 
-export default function Home() {
-  const onSlideChange = (currentSlide) => {};
+export default function Home({ prds }) {
+  //const onSlideChange = (currentSlide) => {};
   const [messageApi, contextHolder] = message.useMessage();
-  const { data = [] } = useSWR("waikiki_basket_guest", storage);
+  //const { data = [] } = useSWR("waikiki_basket_guest", storage);
 
+  const data = useStorage();
   const addCart = (code) => {
     messageApi.info("상품이 장바구니에 담겼습니다.");
     data.push(code);
@@ -26,23 +23,18 @@ export default function Home() {
       {contextHolder}
       <Carousel
         autoplay
-        afterChange={onSlideChange}
+        //afterChange={onSlideChange}
         style={{ marginBottom: "0.5rem" }}
       >
         <div className="tw-relative tw-block tw-overflow-hidden tw-h-32">
           <Image
-            src={banner1}
+            src="/images/menuBanner1.png"
             alt="recommend"
-            fill
+            width={1000}
+            height={400}
+            priority
+            //fill
             //style={{ objectFit: "cover" }}
-          />
-        </div>
-        <div className="tw-relative tw-block tw-overflow-hidden tw-h-32">
-          <Image
-            src={banner2}
-            alt="recommend"
-            fill
-            style={{ objectFit: "cover" }}
           />
         </div>
       </Carousel>
@@ -54,127 +46,39 @@ export default function Home() {
             와이키키의 상품들을 둘러보세요
           </h1>
         </div>
-        <div>
-          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-            <Image
-              src={prd1}
-              alt="recommend"
-              fill
-              className="tw-rounded-xl"
-              style={{ objectFit: "cover" }}
-            />
-            <ShoppingCartIcon
-              onClick={() => {
-                addCart("code1");
-              }}
-              style={{ padding: "6px" }}
-              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-            />
-          </div>
-          <div className="tw-pt-3 tw-pl-1">데일리케어 샴푸 500ml</div>
-          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
-            <p>3,900원</p>
-            <p className="tw-font-normal tw-line-through tw-text-gray-500">
-              10,900원
-            </p>
-          </div>
-        </div>
-        <div>
-          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-            <Image
-              src={prd2}
-              alt="recommend"
-              fill
-              className="tw-rounded-xl"
-              style={{ objectFit: "cover" }}
-            />
-            <ShoppingCartIcon
-              onClick={() => {
-                addCart("code2");
-              }}
-              style={{ padding: "6px" }}
-              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-            />
-          </div>
-          <div className="tw-pt-3 tw-pl-1">피로개선 홍삼스틱 30개입</div>
-          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
-            <p>6,900원</p>
-            <p className="tw-font-normal tw-line-through">20,900원</p>
-          </div>
-        </div>
-        <div>
-          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-            <Image
-              src={prd2}
-              alt="recommend"
-              fill
-              className="tw-rounded-xl"
-              style={{ objectFit: "cover" }}
-            />
-            <ShoppingCartIcon
-              onClick={() => {
-                addCart("code2");
-              }}
-              style={{ padding: "6px" }}
-              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-            />
-          </div>
-          <div className="tw-pt-3 tw-pl-1">피로개선 홍삼스틱 30개입</div>
-          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
-            <p>6,900원</p>
-            <p className="tw-font-normal tw-line-through">20,900원</p>
-          </div>
-        </div>
-        <div>
-          <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-            <Image
-              src={prd2}
-              alt="recommend"
-              fill
-              className="tw-rounded-xl"
-              style={{ objectFit: "cover" }}
-            />
-            <ShoppingCartIcon
-              onClick={() => {
-                addCart("code2");
-              }}
-              style={{ padding: "6px" }}
-              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-            />
-          </div>
-          <div className="tw-pt-3 tw-pl-1">피로개선 홍삼스틱 30개입</div>
-          <div className="tw-pl-1 tw-pb-10 tw-font-bold">
-            <p>6,900원</p>
-            <p className="tw-font-normal tw-line-through">20,900원</p>
-          </div>
-        </div>
 
-        {/* <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-          <Image
-            src={prd3}
-            alt="recommend"
-            fill
-            className="tw-rounded-xl"
-            style={{ objectFit: "cover" }}
-          />
-          <ShoppingCartIcon
-            style={{ padding: "6px" }}
-            className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-          />
-        </div>
-        <div className="tw-relative" style={{ paddingBottom: "100%" }}>
-          <Image
-            src={prd4}
-            alt="recommend"
-            fill
-            className="tw-rounded-xl"
-            style={{ objectFit: "cover" }}
-          />
-          <ShoppingCartIcon
-            style={{ padding: "6px" }}
-            className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-          />
-        </div> */}
+        {prds.map((v) => (
+          <div key={v.id}>
+            <div className="tw-relative" style={{ paddingBottom: "100%" }}>
+              <Image
+                src={`/images/${v.imageUrl}.jpeg`}
+                alt="recommend"
+                fill
+                sizes="50vw"
+                //width={500}
+                //height={300}
+                className="tw-rounded-xl"
+                style={{ objectFit: "cover" }}
+              />
+              <ShoppingCartIcon
+                onClick={() => {
+                  addCart(v.id);
+                }}
+                style={{ padding: "6px" }}
+                className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
+              />
+            </div>
+            <div className="tw-pt-3 tw-pl-1">{v.productName}</div>
+            <div className="tw-pl-1 tw-pb-10 tw-font-bold">
+              <p>{new Intl.NumberFormat().format(v.sellingPrice)}원</p>
+              <p className="tw-font-normal tw-line-through tw-text-gray-500">
+                {v.discountAmount > 0
+                  ? new Intl.NumberFormat().format(v.originPrice) + "원"
+                  : ""}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -183,3 +87,13 @@ export default function Home() {
 Home.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
 };
+
+export async function getStaticProps() {
+  const res = await fetch(`http://localhost:8080/get-recommended-product`);
+  const prds = await res.json();
+
+  return {
+    props: { prds },
+    revalidate: 30,
+  };
+}

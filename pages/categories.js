@@ -1,30 +1,58 @@
 import Layout from "../components/layout/layout";
 import { Button, Menu } from "antd";
 import { useCallback, useMemo, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Categories({ data }) {
-  let items = data.map((v) => {
-    let childs = [];
+  const router = useRouter();
+  const noChildrenMenu = data
+    .filter((v) => {
+      if (v.GROUP_NAME === null) return v;
+    })
+    .map((v, i) => {
+      return {
+        key: v.CATEGORY_ID,
+        label: v.MENU_NAME,
+      };
+    });
 
-    if (v.CATEGORY_TWO.length > 0) {
-      childs = v.CATEGORY_TWO.map((item) => {
-        return {
-          key: item.PATH_NAME || item.ID,
-          label: item.CATEGORY_NAME,
-        };
-      });
-    }
+  const havingChildrenMenu = [
+    ...new Set(
+      data
+        .filter((v) => {
+          if (v.GROUP_NAME !== null) return v;
+        })
+        .map((v) => {
+          return v.GROUP_NAME;
+        })
+    ),
+  ].map((val, index) => {
+    const children = [];
+
+    data.forEach((item) => {
+      if (item.GROUP_NAME === val) {
+        children.push({
+          key: item.CATEGORY_ID,
+          label: item.MENU_NAME,
+        });
+      }
+    });
 
     return {
-      key: v.PATH_NAME || v.ID,
-      label: v.CATEGORY_NAME,
-      children: childs.length > 0 ? childs : undefined,
+      key: `group_${index}`,
+      label: val,
+      children: children,
     };
   });
 
-  const onMenuClick = useCallback(({ key }) => {
-    console.log(key);
-  }, []);
+  const items = [...noChildrenMenu, ...havingChildrenMenu];
+
+  const onMenuClick = useCallback(
+    ({ key }) => {
+      router.push(`/product/${key}`);
+    },
+    [router]
+  );
 
   return (
     <div>
@@ -32,6 +60,8 @@ export default function Categories({ data }) {
     </div>
   );
 }
+
+//http://localhost:3000/product?grp_no=1&cate_no=1
 
 Categories.getLayout = function getLayout(page) {
   return <Layout>{page}</Layout>;
@@ -45,7 +75,7 @@ Categories.getLayout = function getLayout(page) {
 // }
 
 export async function getStaticProps() {
-  const res = await fetch(`http://localhost:8080/api/waikiki/get-categories`);
+  const res = await fetch(`http://localhost:8080/get-categories`);
   const data = await res.json();
 
   return {

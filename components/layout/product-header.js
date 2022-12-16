@@ -1,23 +1,27 @@
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import TopMenu from "./top-menu";
 import styled from "styled-components";
 import useSWR from "swr";
 import storage from "../../lib/storage";
-import { useEffect, useMemo, useRef, useState } from "react";
+
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { throttle } from "lodash";
+import ProductHorizontalMenu from "./product-horizontal-menu";
+import { useRouter } from "next/router";
 
 const Badge = styled.div`
-  font-size: 0.75rem /* 12px */;
+  font-size: 0.5rem /* 12px */;
   line-height: 1rem /* 16px */;
   width: 1rem;
   height: 1rem;
   position: absolute;
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
   border-radius: 9999px;
   text-align: center;
   top: -10%;
   right: -20%;
+  color: white;
 `;
 
 const HeaderComp = styled.header`
@@ -35,8 +39,9 @@ const HeaderComp = styled.header`
     `}
 `;
 
-export default function Header() {
+export default function ProductHeader({ header }) {
   const { data = [] } = useSWR("waikiki_basket_guest", storage);
+  const router = useRouter();
   const [isHeaderFix, setIsHeaderFix] = useState(false);
 
   const throttleScroll = useMemo(
@@ -59,18 +64,26 @@ export default function Header() {
     };
   }, [throttleScroll]);
 
+  const goBack = useCallback(() => {
+    router.back();
+  }, [router]);
+
   return (
     <HeaderComp isFix={isHeaderFix}>
-      <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 tw-bg-blue-800">
-        <div className="tw-text-xl tw-text-white tw-font-bold ">
-          W A I K I K I
+      <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 ">
+        <div className="tw-text-xl tw-text-black tw-font-bold">
+          <ChevronLeftIcon
+            className="tw-w-6 tw-h-6 tw-cursor-pointer"
+            onClick={goBack}
+          />
         </div>
+        <div className="tw-s tw-text-base tw-font-bold">{header.title}</div>
         <div className="tw-relative">
-          <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-white" />
+          <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-black" />
           {data.length > 0 ? <Badge>{data.length}</Badge> : null}
         </div>
       </div>
-      <TopMenu />
+      <ProductHorizontalMenu menus={header.menus} />
     </HeaderComp>
   );
 }
