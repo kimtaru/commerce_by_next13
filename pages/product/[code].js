@@ -6,7 +6,7 @@ import { message } from "antd";
 import ProductLayout from "../../components/layout/product-layout";
 import useStorage from "../../hooks/use-storage";
 
-export default function Product({ data }) {
+export default function Product({ data = [] }) {
   useEffect(() => {
     mutate(
       "globalState",
@@ -24,10 +24,12 @@ export default function Product({ data }) {
     mutate("waikiki_basket_guest");
   };
 
+  const outRec = data.OUT_REC || [];
+
   return (
     <div className="tw-p-2 tw-pt-7 tw-grid tw-grid-cols-2 tw-gap-2">
       {contextHolder}
-      {data.OUT_REC.map((v, i) => (
+      {outRec.map((v, i) => (
         <div key={v.PRODUCT_ID}>
           <div className="tw-relative" style={{ paddingBottom: "100%" }}>
             <Image
