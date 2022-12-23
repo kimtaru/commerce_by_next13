@@ -1,26 +1,11 @@
-import { Carousel, message } from "antd";
+import { Carousel } from "antd";
 import Layout from "../components/layout/layout";
 import Image from "next/image";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { mutate } from "swr";
-import useStorage from "../hooks/use-storage";
+import AddCart from "../components/addCart";
 
 export default function Home({ prds }) {
-  //const onSlideChange = (currentSlide) => {};
-  const [messageApi, contextHolder] = message.useMessage();
-  //const { data = [] } = useSWR("waikiki_basket_guest", storage);
-
-  const data = useStorage();
-  const addCart = (code) => {
-    messageApi.info("상품이 장바구니에 담겼습니다.");
-    data.push(code);
-    localStorage.setItem("waikiki_basket_guest", JSON.stringify(data));
-    mutate("waikiki_basket_guest");
-  };
-
   return (
     <div>
-      {contextHolder}
       <Carousel
         autoplay
         //afterChange={onSlideChange}
@@ -60,13 +45,8 @@ export default function Home({ prds }) {
                 className="tw-rounded-xl"
                 style={{ objectFit: "cover" }}
               />
-              <ShoppingCartIcon
-                onClick={() => {
-                  addCart(v.id);
-                }}
-                style={{ padding: "6px" }}
-                className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-              />
+
+              <AddCart code={v.id} />
             </div>
             <div className="tw-pt-3 tw-pl-1">{v.productName}</div>
             <div className="tw-pl-1 tw-pb-10 tw-font-bold">

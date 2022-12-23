@@ -1,10 +1,8 @@
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useEffect } from "react";
 import { mutate } from "swr";
-import { message } from "antd";
 import ProductLayout from "../../components/layout/product-layout";
-import useStorage from "../../hooks/use-storage";
+import AddCart from "../../components/addCart";
 
 export default function Product({ data = [] }) {
   useEffect(() => {
@@ -14,21 +12,11 @@ export default function Product({ data = [] }) {
       false
     );
   }, [data]);
-  const [messageApi, contextHolder] = message.useMessage();
-  const basketList = useStorage();
-
-  const addCart = (code) => {
-    messageApi.info("상품이 장바구니에 담겼습니다.");
-    basketList.push(code);
-    localStorage.setItem("waikiki_basket_guest", JSON.stringify(basketList));
-    mutate("waikiki_basket_guest");
-  };
 
   const outRec = data.OUT_REC || [];
 
   return (
     <div className="tw-p-2 tw-pt-7 tw-grid tw-grid-cols-2 tw-gap-2">
-      {contextHolder}
       {outRec.map((v, i) => (
         <div key={v.PRODUCT_ID}>
           <div className="tw-relative" style={{ paddingBottom: "100%" }}>
@@ -40,13 +28,7 @@ export default function Product({ data = [] }) {
               className="tw-rounded-xl"
               style={{ objectFit: "cover" }}
             />
-            <ShoppingCartIcon
-              onClick={() => {
-                addCart(v.id);
-              }}
-              style={{ padding: "6px" }}
-              className="tw-cursor-pointer tw-opacity-40 tw-bottom-2 tw-right-2 tw-absolute tw-w-10 tw-h-10 tw-bg-black tw-rounded-full  tw-text-white"
-            />
+            <AddCart code={v.PRODUCT_ID} />
           </div>
           <div className="tw-pt-3 tw-pl-1">{v.PRODUCT_NAME}</div>
           <div className="tw-pl-1 tw-pb-10 tw-font-bold">

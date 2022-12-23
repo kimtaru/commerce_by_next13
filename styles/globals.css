@@ -7,3 +7,24 @@
     @apply tw-border-dashed tw-border-2 tw-border-red-500;
   }
 }
+
+.txt-hide {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+label::before {
+  display: inline-block;
+  content: "";
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+  color: blue;
+  background-image: url("../public/svgs/uncheck.svg");
+}
+input:checked + label::before {
+  background-image: url("../public/svgs/check.svg");
+}

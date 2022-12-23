@@ -1,28 +1,10 @@
-import { ShoppingCartIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
-import TopMenu from "./top-menu";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import styled from "styled-components";
-import useSWR from "swr";
-import storage from "../../lib/storage";
-
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { throttle } from "lodash";
 import ProductHorizontalMenu from "./product-horizontal-menu";
 import { useRouter } from "next/router";
-
-const Badge = styled.div`
-  font-size: 0.5rem /* 12px */;
-  line-height: 1rem /* 16px */;
-  width: 1rem;
-  height: 1rem;
-  position: absolute;
-  --tw-bg-opacity: 1;
-  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
-  border-radius: 9999px;
-  text-align: center;
-  top: -10%;
-  right: -20%;
-  color: white;
-`;
+import Cart from "../cart";
 
 const HeaderComp = styled.header`
   --tw-bg-opacity: 1;
@@ -40,7 +22,6 @@ const HeaderComp = styled.header`
 `;
 
 export default function ProductHeader({ header }) {
-  const { data = [] } = useSWR("waikiki_basket_guest", storage);
   const router = useRouter();
   const [isHeaderFix, setIsHeaderFix] = useState(false);
 
@@ -78,10 +59,7 @@ export default function ProductHeader({ header }) {
           />
         </div>
         <div className="tw-s tw-text-base tw-font-bold">{header.title}</div>
-        <div className="tw-relative">
-          <ShoppingCartIcon className="tw-w-8 tw-h-8 tw-text-black" />
-          {data.length > 0 ? <Badge>{data.length}</Badge> : null}
-        </div>
+        <Cart bgWhite={true} />
       </div>
       <ProductHorizontalMenu menus={header.menus} />
     </HeaderComp>
