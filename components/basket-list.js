@@ -12,7 +12,6 @@ const BasketList = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   useEffect(() => {
-    console.log(cart);
     setTotalAmount(
       cart
         .filter((v) => purchaseList.includes(v.PRODUCT_ID))
@@ -28,8 +27,13 @@ const BasketList = () => {
     });
   };
 
-  const deleteCart = async (code) => {
+  const deleteCart = async (code, pid) => {
     await deleteCartToServer(code).then(() => {
+      setPurchaseList(
+        purchaseList.filter((v) => {
+          return v !== pid;
+        })
+      );
       mutate();
     });
   };
@@ -45,7 +49,6 @@ const BasketList = () => {
             checked={purchaseList.length === cart.length}
             onChange={(e) => {
               if (e.target.checked) {
-                console.log("전체선택");
                 setPurchaseList(cart.map((v) => v.PRODUCT_ID));
               } else {
                 setPurchaseList([]);
@@ -93,7 +96,7 @@ const BasketList = () => {
                 <XMarkIcon
                   className="tw-w-5 tw-h-5 tw-float-right tw-text-gray-300"
                   onClick={() => {
-                    deleteCart(v.BASKET_ID);
+                    deleteCart(v.BASKET_ID, v.PRODUCT_ID);
                   }}
                 />
                 <div className="tw-px-8 tw-py-2 tw-relative">

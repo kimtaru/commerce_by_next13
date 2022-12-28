@@ -1,11 +1,19 @@
-import { Carousel } from "antd";
+import { Button, Carousel } from "antd";
 import Layout from "../components/layout/layout";
 import Image from "next/image";
 import AddCart from "../components/addCart";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 export default function Home({ prds }) {
+  const { data: session } = useSession();
+
   return (
     <div>
+      {/* <Button onClick={() => signIn()}>SIGN IN</Button>
+      <Button onClick={() => signOut()}>SIGN OUT</Button>
+
+      <iframe src="/api/example/jwt" /> */}
+
       <Carousel
         autoplay
         //afterChange={onSlideChange}

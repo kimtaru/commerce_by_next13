@@ -44,7 +44,7 @@ export default function Product({ data = [] }) {
 }
 
 Product.getLayout = function getLayout(page) {
-  return <ProductLayout title="스킨케어">{page}</ProductLayout>;
+  return <ProductLayout>{page}</ProductLayout>;
 };
 
 export async function getStaticPaths() {
