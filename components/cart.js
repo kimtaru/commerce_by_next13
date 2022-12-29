@@ -2,6 +2,8 @@ import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import useBasket from "../hooks/use-basket";
+import useSWR from "swr";
+import initialStore from "../lib/store";
 
 const Badge = styled.div`
   font-size: 0.5rem /* 12px */;
@@ -23,8 +25,27 @@ const Badge = styled.div`
 `;
 
 const Cart = ({ bgWhite }) => {
-  const { cart = [] } = useBasket();
   const router = useRouter();
+
+  const {
+    data: { session },
+  } = useSWR("globalState", {
+    fallbackData: initialStore,
+  });
+
+  const { cart = [] } = useBasket();
+
+  const movePage = (session) => {
+    if (session) {
+      router.push("/basket");
+    } else {
+      if (confirm("로그인이 필요합니다.")) {
+        router.push("/user-info");
+      } else {
+        return false;
+      }
+    }
+  };
 
   return (
     <div className="tw-relative">
@@ -32,18 +53,20 @@ const Cart = ({ bgWhite }) => {
         <ShoppingCartIcon
           className="tw-w-8 tw-h-8 tw-text-black"
           onClick={() => {
-            router.push("/basket");
+            movePage(session);
           }}
         />
       ) : (
         <ShoppingCartIcon
           className="tw-w-8 tw-h-8 tw-text-white"
           onClick={() => {
-            router.push("/basket");
+            movePage(session);
           }}
         />
       )}
-      {cart.length > 0 ? <Badge isWhite={bgWhite}>{cart.length}</Badge> : null}
+      {session && cart.length > 0 ? (
+        <Badge isWhite={bgWhite}>{cart.length}</Badge>
+      ) : null}
     </div>
   );
 };

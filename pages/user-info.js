@@ -1,8 +1,7 @@
-import ProductLayout from "../components/layout/product-layout";
 import styled from "styled-components";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import Cart from "../components/cart";
-import { useState, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import BottomNavigation from "../components/layout/bottom-navigation";
@@ -22,20 +21,39 @@ const HeaderComp = styled.header`
     `}
 `;
 const UserInfo = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
-  const [isHeaderFix, setIsHeaderFix] = useState(false);
-  const [loadingState, setLoadingState] = useState(status);
+
   const goBack = useCallback(() => {
     router.back();
   }, [router]);
 
-  useEffect(() => {
-    setLoadingState(status);
-  }, [status]);
+  // useEffect(() => {
+  //   mutate("globalState", { ...initialStore, session: session }, false);
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios({
+  //         method: "get",
+  //         url: "/get-basket",
+  //         baseURL: "http://localhost:8080",
+  //         timeout: 2000,
+  //       });
+
+  //       if (true) {
+  //         movePage();
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [session, router]);
+
   return (
     <>
-      <HeaderComp isFix={isHeaderFix}>
+      <HeaderComp isFix={false}>
         <div className="tw-flex tw-items-center tw-justify-between tw-py-2 tw-px-4 ">
           <div className="tw-text-xl tw-text-black tw-font-bold">
             <ChevronLeftIcon
@@ -53,7 +71,7 @@ const UserInfo = () => {
         <div className="tw-p-20">
           <div
             onClick={() => {
-              signOut();
+              signOut({ callbackUrl: "http://localhost:3000/" });
             }}
             className="tw-border-2 tw-text-center tw-p-4 tw-cursor-pointer"
           >
@@ -64,13 +82,12 @@ const UserInfo = () => {
         <div className="tw-p-20">
           <div
             onClick={() => {
-              signIn("google");
+              signIn("google", { callbackUrl: "http://localhost:3000/" });
             }}
             className="tw-border-2 tw-text-center tw-p-4 tw-cursor-pointer"
           >
             구글 로그인
           </div>
-          {loadingState}
         </div>
       )}
       <BottomNavigation />

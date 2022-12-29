@@ -1,24 +1,21 @@
-import { Button, Carousel } from "antd";
+import { Carousel } from "antd";
 import Layout from "../components/layout/layout";
 import Image from "next/image";
 import AddCart from "../components/addCart";
-import { signIn, useSession, signOut } from "next-auth/react";
+import { useEffect } from "react";
+import { mutate } from "swr";
+import { useSession } from "next-auth/react";
+import initialStore from "../lib/store";
 
 export default function Home({ prds }) {
   const { data: session } = useSession();
+  useEffect(() => {
+    mutate("globalState", { ...initialStore, session: session }, false);
+  }, [session]);
 
   return (
     <div>
-      {/* <Button onClick={() => signIn()}>SIGN IN</Button>
-      <Button onClick={() => signOut()}>SIGN OUT</Button>
-
-      <iframe src="/api/example/jwt" /> */}
-
-      <Carousel
-        autoplay
-        //afterChange={onSlideChange}
-        style={{ marginBottom: "0.5rem" }}
-      >
+      <Carousel autoplay style={{ marginBottom: "0.5rem" }}>
         <div className="tw-relative tw-block tw-overflow-hidden tw-h-32">
           <Image
             src="/images/menuBanner1.png"
@@ -26,8 +23,6 @@ export default function Home({ prds }) {
             width={1000}
             height={400}
             priority
-            //fill
-            //style={{ objectFit: "cover" }}
           />
         </div>
       </Carousel>
